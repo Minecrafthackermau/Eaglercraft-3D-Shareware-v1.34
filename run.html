@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MineCraft 3D ShareWare</title>
+    <style>
+        @font-face {
+            font-family: 'MinecraftFont';
+            src: url('src/fonts/mode.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'MinecraftFont', Arial, sans-serif;
+            overflow: hidden;
+            background: #000; /* Fallback background color */
+        }
+
+        .container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            perspective: 1000px; /* Perspective for 3D effect */
+        }
+
+        .panorama {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transform: rotateY(0deg); /* Initial transform */
+            animation: rotatePanorama 60s infinite linear;
+        }
+
+        .panorama-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .front  { transform: rotateY(  0deg) translateZ(500px); }
+        .back   { transform: rotateY(180deg) translateZ(500px); }
+        .left   { transform: rotateY(-90deg) translateZ(500px); }
+        .right  { transform: rotateY( 90deg) translateZ(500px); }
+        .top    { transform: rotateX( 90deg) translateZ(500px); }
+        .bottom { transform: rotateX(-90deg) translateZ(500px); }
+
+        @keyframes rotatePanorama {
+            from { transform: rotateY(0deg); }
+            to   { transform: rotateY(360deg); }
+        }
+
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 500px; /* Set the width of the logo to match the button width */
+            z-index: 1;
+        }
+
+        .logo img {
+            width: 100%; /* Make sure the image fills the width of the .logo container */
+            height: auto;
+        }
+
+        header {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            font-size: 32px;
+            font-family: 'MinecraftFont', Arial, sans-serif;
+            z-index: 2;
+        }
+
+        main {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 2;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .icon-button {
+            display: inline-block;
+            width: 450px;
+            height: 40px;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            color: #fff;
+            font-family: 'MinecraftFont', Arial, sans-serif;
+            font-size: 16px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+            transition: background-image 0.3s ease; /* Transition for smooth hover effect */
+        }
+
+        .icon-button img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            transition: opacity 0.3s ease; /* Transition for smooth opacity change */
+            z-index: 100;
+        }
+
+        /* Default images */
+        .icon-button.select-episode img {
+            background-image: url('src/textures/select-episode.png');
+        }
+
+        /* Hover images */
+        .icon-button:hover img {
+            opacity: 0; /* Hide the default image */
+        }
+
+        .icon-button:hover::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('src/textures/button-hover.png');
+            background-size: cover;
+            background-position: center;
+            z-index: 99;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .bottom-left-text {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            color: #fff;
+            font-size: 14px;
+            font-family: 'MinecraftFont', Arial, sans-serif;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+            z-index: 2;
+        }
+
+        .bottom-right-text {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            color: #fff;
+            font-size: 14px;
+            font-family: 'MinecraftFont', Arial, sans-serif;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="panorama">
+            <div class="panorama-face front" style="background-image: url('src/textures/panorama_0.png');"></div>
+            <div class="panorama-face back" style="background-image: url('src/textures/panorama_1.png');"></div>
+            <div class="panorama-face left" style="background-image: url('src/textures/panorama_2.png');"></div>
+            <div class="panorama-face right" style="background-image: url('src/textures/panorama_3.png');"></div>
+            <div class="panorama-face top" style="background-image: url('src/textures/panorama_4.png');"></div>
+            <div class="panorama-face bottom" style="background-image: url('src/textures/panorama_5.png');"></div>
+        </div>
+        <div class="logo">
+            <img src="src/textures/logo.png" alt="Logo">
+        </div>
+        <header>
+        </header>
+        <main>
+            <div class="button-container">
+                <a href="episodes.html" class="icon-button select-episode" aria-label="Select Episode">
+                    <img src="src/textures/select-episode.png" alt="Select Episode">
+                    <div class="button-title">Select Episode</div>
+                </a>
+            </div>
+        </main>
+        <footer>
+        </footer>
+        <div class="bottom-left-text">
+            Minecraft 3D Shareware v1.34
+        </div>
+        <div class="bottom-right-text">
+            Copyright Mojang AB. Do Not Distribute!
+        </div>
+    </div>
+
+    <!-- Add an audio element for the click sound -->
+ <source src="src/sounds/click. ogg" type="audio/ogg"> 
+    <script>
+        // Function to play the click sound
+        function playClickSound() {
+            const audio = document.getElementById('click-sound');
+            audio.play();
+        }
+
+        // Attach event listeners to all buttons
+        document.querySelectorAll('.icon-button').forEach(button => {
+            button.addEventListener('click', playClickSound);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft 3D Shareware v1.34</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('src/textures/options_background.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            overflow: hidden;
+        }
+
+        .button-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .button-container img {
+            display: block;
+            width: 450px;
+            height: auto;
+            transition: opacity 0.1s ease;
+        }
+
+        .button-container img:hover {
+            opacity: 0.8;
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .button-group button {
+            background-image: url('src/textures/worldother.png');
+            border: none;
+            width: 450px;
+            height: 40px;
+            cursor: pointer;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .button-group button:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="button-wrapper">
+        <div class="button-container">
+<source src="src/sounds/click. ogg" type="audio/ogg"> 
+            <a href="playgame.html">
+                <img src="src/textures/worldog.png" alt="Button Image 1" id="hover-button" />
+            </a>
+        </div>
+
+        <div class="button-group">
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+        </div>
+    </div>
+
+    <script>
+        const button = document.getElementById('hover-button');
+        button.addEventListener('mouseover', () => {
+            button.src = 'src/textures/worldyou.png';
+        });
+        button.addEventListener('mouseout', () => {
+            button.src = 'src/textures/worldog.png';
+        });
+    </script>
+
+</body>
+</html>
